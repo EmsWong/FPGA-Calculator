@@ -1,0 +1,33 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+
+
+ENTITY full_adder_4bit IS
+	PORT
+	(
+		INPUT_A, INPUT_B, CARRY_IN									: in std_logic;
+		FULL_ADDER_SUM, FULL_ADDER_CARRY							: out std_logic
+	);
+END full_adder_4bit;
+
+ARCHITECTURE adder OF full_adder_4bit IS
+
+component full_adder_1bit port(
+		INPUT_A							: in std_logic;
+		INPUT_B							: in std_logic;
+		CARRY_IN							: in std_logic;
+		FULL_ADDER_SUM					: out std_logic;
+		FULL_ADDER_CARRY				: out std_logic
+	);
+end component;
+
+
+BEGIN
+
+FULL_ADDER_SUM <= (INPUT_A XOR INPUT_B) OR ((INPUT_A XOR INPUT_B) AND CARRY_IN);
+FULL_ADDER_CARRY <= (INPUT_A AND INPUT_B) XOR CARRY_IN;
+
+
+END adder;
